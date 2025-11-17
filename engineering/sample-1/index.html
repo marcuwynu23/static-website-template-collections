@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0">
+	<title>PrecisionFlow Engineering - Technical Sales & Solutions</title>
+
+	<!-- Tailwind Browser CDN -->
+	<script src="https://cdn.tailwindcss.com"></script>
+
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+		rel="stylesheet">
+
+	<style>
+		body {
+			font-family: 'Inter', sans-serif;
+			background-color: #f7f9fb;
+		}
+
+		body::-webkit-scrollbar {
+			width: 8px;
+		}
+
+		body::-webkit-scrollbar-thumb {
+			background-color: #2c5282;
+			border-radius: 10px;
+		}
+	</style>
+
+	<script>
+		tailwind.config = {
+			theme: {
+				extend: {
+					colors: {
+						'primary-blue': '#2c5282',
+						'secondary-gray': '#4a5568',
+						'accent-teal': '#38b2ac',
+					}
+				}
+			}
+		}
+
+		const pages = ['home', 'about', 'products', 'services', 'contact'];
+
+		function showPage(pageId) {
+			pages.forEach(id => {
+				const el = document.getElementById(id + '-page');
+				if (el) el.classList.add('hidden');
+			});
+			const selected = document.getElementById(pageId + '-page');
+			if (selected) selected.classList.remove('hidden');
+
+			document.querySelectorAll('.nav-link').forEach(link => {
+				const active = link.getAttribute('href') === `#${pageId}`;
+				link.classList.remove('text-accent-teal', 'border-b-2', 'border-accent-teal', 'font-semibold');
+				link.classList.add('hover:text-accent-teal', 'text-gray-700');
+				if (active) {
+					link.classList.add('text-accent-teal', 'border-b-2', 'border-accent-teal', 'font-semibold');
+					link.classList.remove('text-gray-700');
+				}
+			});
+
+			window.scrollTo({ top: 0, behavior: 'smooth' });
+		}
+
+		window.onload = function () {
+			const hashPage = window.location.hash.substring(1) || 'home';
+			showPage(pages.includes(hashPage) ? hashPage : 'home');
+			window.addEventListener('hashchange', () => {
+				const h = window.location.hash.substring(1);
+				if (pages.includes(h)) showPage(h);
+			});
+		}
+
+		function toggleMobileMenu() {
+			document.getElementById('mobile-menu').classList.toggle('hidden');
+		}
+	</script>
+</head>
+
+<body class="min-h-screen antialiased text-gray-800">
+
+	<!-- Header -->
+	<header class="sticky top-0 z-50 bg-white shadow-md">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+			<a href="#home"
+				onclick="showPage('home')"
+				class="text-2xl font-extrabold text-primary-blue tracking-tight">
+				Precision<span class="text-accent-teal">Flow</span>
+			</a>
+
+			<!-- Desktop Nav -->
+			<nav class="hidden md:flex space-x-6">
+				<a href="#home"
+					onclick="showPage('home')"
+					class="nav-link px-1 text-sm">Home</a>
+				<a href="#about"
+					onclick="showPage('about')"
+					class="nav-link px-1 text-sm">About</a>
+				<a href="#products"
+					onclick="showPage('products')"
+					class="nav-link px-1 text-sm">Products</a>
+				<a href="#services"
+					onclick="showPage('services')"
+					class="nav-link px-1 text-sm">Services</a>
+				<a href="#contact"
+					onclick="showPage('contact')"
+					class="nav-link px-1 text-sm">Contact</a>
+			</nav>
+
+			<!-- Mobile Hamburger -->
+			<div class="md:hidden">
+				<button onclick="toggleMobileMenu()"
+					class="text-primary-blue focus:outline-none">
+					<svg class="w-6 h-6"
+						fill="none"
+						stroke="currentColor"
+						viewBox="0 0 24 24">
+						<path stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M4 6h16M4 12h16M4 18h16" />
+					</svg>
+				</button>
+			</div>
+		</div>
+
+		<!-- Mobile Menu -->
+		<nav id="mobile-menu"
+			class="md:hidden hidden bg-white border-t">
+			<div class="flex flex-col space-y-2 p-4">
+				<a href="#home"
+					onclick="showPage('home')"
+					class="nav-link text-sm">Home</a>
+				<a href="#about"
+					onclick="showPage('about')"
+					class="nav-link text-sm">About</a>
+				<a href="#products"
+					onclick="showPage('products')"
+					class="nav-link text-sm">Products</a>
+				<a href="#services"
+					onclick="showPage('services')"
+					class="nav-link text-sm">Services</a>
+				<a href="#contact"
+					onclick="showPage('contact')"
+					class="nav-link text-sm">Contact</a>
+			</div>
+		</nav>
+	</header>
+
+	<!-- Main Content -->
+	<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+		<!-- 1. HOME -->
+		<section id="home-page"
+			class="hidden">
+			<div class="text-center py-12 sm:py-20 bg-primary-blue text-white rounded-xl shadow-xl mb-12">
+				<h1 class="text-4xl sm:text-5xl font-extrabold mb-4 leading-tight">Precision Industrial Flow Control &
+					Measurement</h1>
+				<p class="text-lg sm:text-xl font-light mb-8 max-w-3xl mx-auto px-4">Your trusted partner for specialized
+					valves, regulators, and flowmeters, backed by expert technical sales and engineering support.</p>
+				<button onclick="showPage('services')"
+					class="bg-accent-teal hover:bg-teal-400 text-white font-bold py-3 px-6 rounded-full shadow-lg transition transform hover:scale-105">Explore
+					Our Solutions</button>
+			</div>
+			<div class="grid md:grid-cols-3 gap-6 text-center">
+				<div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl border-t-4 border-primary-blue">
+					<div class="text-4xl text-primary-blue mb-3">⚙️</div>
+					<h3 class="text-xl font-semibold mb-2">Technical Expertise</h3>
+					<p class="text-secondary-gray">We bridge the gap between complex engineering products and your specific
+						application requirements.</p>
+				</div>
+				<div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl border-t-4 border-primary-blue">
+					<div class="text-4xl text-primary-blue mb-3">🛠️</div>
+					<h3 class="text-xl font-semibold mb-2">Reliable Components</h3>
+					<p class="text-secondary-gray">Supplying high-quality valves, regulators, and flowmeters built for durability
+						and precision control.</p>
+				</div>
+				<div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl border-t-4 border-primary-blue">
+					<div class="text-4xl text-primary-blue mb-3">🤝</div>
+					<h3 class="text-xl font-semibold mb-2">Complete Support</h3>
+					<p class="text-secondary-gray">Offering comprehensive pre-sales consultation, installation guidance, and
+						post-sales technical support.</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- 2. ABOUT -->
+		<section id="about-page"
+			class="hidden">
+			<h2 class="text-3xl font-bold text-primary-blue mb-6 border-b pb-2">About PrecisionFlow Engineering</h2>
+			<div class="grid lg:grid-cols-2 gap-12 items-center">
+				<div class="space-y-6">
+					<p class="text-lg leading-relaxed">Founded by experienced engineers, PrecisionFlow Engineering addresses the
+						need for reliable, expertly-supported industrial flow control solutions.</p>
+					<p class="text-lg leading-relaxed">We deliver premium products—valves, regulators, and flowmeters—with
+						comprehensive application knowledge.</p>
+					<p class="text-lg font-semibold text-primary-blue">Our Mission: Provide unparalleled technical consulting and
+						reliable flow control equipment to maximize uptime and ensure precision.</p>
+				</div>
+				<div class="bg-white p-8 rounded-xl shadow-xl border-l-4 border-accent-teal">
+					<h3 class="text-2xl font-bold text-secondary-gray mb-4">Our Core Values</h3>
+					<ul class="space-y-3 text-secondary-gray">
+						<li class="flex items-start"><span class="text-accent-teal mr-3 text-xl">✓</span><span>Integrity:
+								Prioritizing the best solution for the client.</span></li>
+						<li class="flex items-start"><span class="text-accent-teal mr-3 text-xl">✓</span><span>Precision: Accurate
+								product selection and support documentation.</span></li>
+						<li class="flex items-start"><span class="text-accent-teal mr-3 text-xl">✓</span><span>Partnership: Building
+								long-term client relationships.</span></li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<!-- 3. PRODUCTS -->
+		<section id="products-page"
+			class="hidden">
+			<h2 class="text-3xl font-bold text-primary-blue mb-8 border-b pb-2">Our Specialized Product Portfolio</h2>
+			<p class="text-lg mb-10 text-secondary-gray">We supply critical components for flow control, pressure regulation,
+				and precise measurement across demanding industrial environments.</p>
+
+			<div class="space-y-12">
+				<!-- Valves -->
+				<div class="bg-white p-8 rounded-xl shadow-lg border-l-8 border-primary-blue">
+					<h3 class="text-2xl font-bold mb-4 text-primary-blue flex items-center"><span class="mr-3 text-4xl">🎚️</span>
+						Industrial Valves</h3>
+					<p class="mb-4 text-secondary-gray">Essential devices for controlling flow. Material and actuation are matched
+						to your process conditions.</p>
+					<div class="grid sm:grid-cols-1 md:grid-cols-3 gap-4 text-sm font-medium">
+						<div class="p-3 bg-gray-100 rounded-lg">Control Valves: precise throttling (Globe Valves)</div>
+						<div class="p-3 bg-gray-100 rounded-lg">On/Off Valves: quick shut-off (Ball/Gate Valves)</div>
+						<div class="p-3 bg-gray-100 rounded-lg">Specialty Valves: Cryogenic, High-Pressure, Sanitary</div>
+					</div>
+				</div>
+
+				<!-- Regulators -->
+				<div class="bg-white p-8 rounded-xl shadow-lg border-l-8 border-accent-teal">
+					<h3 class="text-2xl font-bold mb-4 text-primary-blue flex items-center"><span class="mr-3 text-4xl">⚖️</span>
+						Pressure & Flow Regulators</h3>
+					<p class="mb-4 text-secondary-gray">Maintain constant outlet pressure or flow rate, ensuring stability.</p>
+					<ul class="list-disc list-inside space-y-2 text-secondary-gray pl-4">
+						<li>Pressure Reducing Regulators</li>
+						<li>Back Pressure Regulators</li>
+						<li>Flow Controllers (mechanical/electronic)</li>
+					</ul>
+				</div>
+
+				<!-- Flowmeters -->
+				<div class="bg-white p-8 rounded-xl shadow-lg border-l-8 border-primary-blue">
+					<h3 class="text-2xl font-bold mb-4 text-primary-blue flex items-center"><span class="mr-3 text-4xl">💧</span>
+						Flowmeters</h3>
+					<p class="mb-4 text-secondary-gray">Accurate measurement devices for quality control and process optimization.
+					</p>
+					<div class="grid sm:grid-cols-1 md:grid-cols-2 gap-4 text-sm font-medium">
+						<div class="p-3 bg-gray-100 rounded-lg">Coriolis Meters: high-accuracy mass flow</div>
+						<div class="p-3 bg-gray-100 rounded-lg">Ultrasonic Meters: non-intrusive measurement</div>
+						<div class="p-3 bg-gray-100 rounded-lg">Differential Pressure Meters: cost-effective, reliable</div>
+					</div>
+				</div>
+
+				<div class="text-center pt-8">
+					<button onclick="showPage('contact')"
+						class="bg-accent-teal hover:bg-teal-400 text-white font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105">
+						Request a Product Quote
+					</button>
+				</div>
+			</div>
+		</section>
+
+		<!-- 4. SERVICES -->
+		<section id="services-page"
+			class="hidden">
+			<h2 class="text-3xl font-bold text-primary-blue mb-8 border-b pb-2">Technical Sales & Engineering Services</h2>
+			<p class="text-lg mb-10 text-secondary-gray">We integrate engineering knowledge with responsive support to deliver
+				complete solutions.</p>
+
+			<div class="grid sm:grid-cols-1 md:grid-cols-2 gap-6">
+				<div class="bg-white p-6 rounded-xl shadow-lg flex flex-col">
+					<h3 class="text-xl font-bold text-primary-blue mb-3">Solution Design & Consulting</h3>
+					<p class="text-secondary-gray flex-grow">We analyze your process and design optimized flow-control systems
+						using the best valves, regulators, and meters.</p>
+				</div>
+				<div class="bg-white p-6 rounded-xl shadow-lg flex flex-col">
+					<h3 class="text-xl font-bold text-primary-blue mb-3">Pre- & Post-Sales Support</h3>
+					<p class="text-secondary-gray flex-grow">From inquiry to installation, we provide continuous assistance
+						including sizing, specification review, and troubleshooting.</p>
+				</div>
+				<div class="bg-white p-6 rounded-xl shadow-lg flex flex-col">
+					<h3 class="text-xl font-bold text-primary-blue mb-3">System Integration & Optimization</h3>
+					<p class="text-secondary-gray flex-grow">We ensure seamless integration into PLC/DCS systems, optimizing
+						control loops for efficiency and accuracy.</p>
+				</div>
+				<div class="bg-white p-6 rounded-xl shadow-lg flex flex-col">
+					<h3 class="text-xl font-bold text-primary-blue mb-3">Training & Workshops</h3>
+					<p class="text-secondary-gray flex-grow">Customized sessions on installation, calibration, and maintenance to
+						extend product lifespan.</p>
+				</div>
+			</div>
+
+			<div class="text-center mt-12">
+				<p class="text-lg font-semibold text-secondary-gray">Ready to partner with technical experts?</p>
+				<button onclick="showPage('contact')"
+					class="mt-4 bg-primary-blue hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105">Discuss
+					Your Project Needs</button>
+			</div>
+		</section>
+
+		<!-- 5. CONTACT -->
+		<section id="contact-page"
+			class="hidden">
+			<h2 class="text-3xl font-bold text-primary-blue mb-8 border-b pb-2">Get In Touch</h2>
+			<div class="grid sm:grid-cols-1 lg:grid-cols-2 gap-8">
+
+				<div class="bg-white p-8 rounded-xl shadow-xl">
+					<h3 class="text-2xl font-bold text-secondary-gray mb-4">Inquiry Form</h3>
+					<form class="space-y-4">
+						<input type="text"
+							placeholder="Full Name"
+							required
+							class="w-full rounded-md p-2 border border-gray-300 focus:ring-accent-teal focus:border-accent-teal">
+						<input type="email"
+							placeholder="Work Email"
+							required
+							class="w-full rounded-md p-2 border border-gray-300 focus:ring-accent-teal focus:border-accent-teal">
+						<select required
+							class="w-full rounded-md p-2 border border-gray-300 focus:ring-accent-teal focus:border-accent-teal">
+							<option disabled
+								selected>Topic of Interest</option>
+							<option>Product Quote</option>
+							<option>Technical Consulting</option>
+							<option>General Inquiry</option>
+							<option>Service/Support</option>
+						</select>
+						<textarea rows="4"
+							placeholder="How can we help you?"
+							required
+							class="w-full rounded-md p-2 border border-gray-300 focus:ring-accent-teal focus:border-accent-teal"></textarea>
+						<button type="submit"
+							class="w-full py-2 px-4 bg-primary-blue text-white font-bold rounded-md hover:bg-blue-600 transition">Send
+							Inquiry</button>
+					</form>
+				</div>
+
+				<div class="space-y-6">
+					<div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-accent-teal">
+						<h3 class="text-xl font-bold text-primary-blue mb-2">Primary Contact</h3>
+						<p class="text-secondary-gray">
+							Sales & Support: (555) 123-4567<br>Email: solutions@precisionflow.com<br>Hours: M-F, 8:00 AM - 5:00 PM
+						</p>
+					</div>
+					<div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-accent-teal">
+						<h3 class="text-xl font-bold text-primary-blue mb-2">Headquarters</h3>
+						<address class="not-italic text-secondary-gray">101 Industrial Park Drive, Suite 200<br>Tech City, CA
+							90210<br>USA</address>
+					</div>
+				</div>
+
+			</div>
+		</section>
+
+	</main>
+
+	<!-- Footer -->
+	<footer class="bg-secondary-gray mt-12 py-8">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-300">
+			<div class="text-lg font-semibold mb-2">PrecisionFlow Engineering</div>
+			<p class="text-sm">© 2025 PrecisionFlow Engineering. All rights reserved.</p>
+			<p class="text-xs mt-2">Follow us: <span class="text-accent-teal">LinkedIn | Twitter | Facebook</span></p>
+		</div>
+	</footer>
+
+</body>
+
+</html>
